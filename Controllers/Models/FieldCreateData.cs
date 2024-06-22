@@ -1,19 +1,18 @@
 ﻿using YG.Server.UserDataStorage.DataBase.Models;
 
-namespace YG.Server.UserDataStorage.Controllers.Models
-{
-    public class FieldCreateData
-    {
-        public string Key { get; set; } = string.Empty;
-        public string Value { get; set; } = string.Empty;
+namespace YG.Server.UserDataStorage.Controllers.Models;
 
-        public Field ToDataBase()
+public class FieldCreateData
+{
+    public string Key { get; set; } = string.Empty;
+    public string Value { get; set; } = string.Empty;
+
+    public Field ToDataBase()
+    {
+        return new Field
         {
-            return new Field
-            {
-                Key = Key,
-                Value = Value
-            };
-        }
+            Key = Key,
+            Value = Value
+        };
     }
 }

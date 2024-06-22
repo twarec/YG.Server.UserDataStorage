@@ -1,7 +1,6 @@
-﻿namespace YG.Server.UserDataStorage
+﻿namespace YG.Server.UserDataStorage;
+
+public static class Configurate
 {
-    public static class Configurate
-    {
-        public static string DataBaseConnection { get; set; } = string.Empty;
-    }
+    public static string DataBaseConnection { get; set; } = string.Empty;
 }
