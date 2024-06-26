@@ -80,7 +80,7 @@ public class FieldController(IFieldService fieldService) : ControllerBase
     [HttpGet("Root/{rootId}/Key/{key}")]
     [ProducesResponseType(typeof(Field), StatusCodes.Status200OK)]
     [ProducesResponseType(404)]
-    public async Task<IActionResult> GetFromRootAsync([FromRoute, Required] string rootId, [FromQuery, Required] string key)
+    public async Task<IActionResult> GetFromRootAsync([FromRoute, Required] string rootId, [FromRoute, Required] string key)
     {
         var result = await fieldService.GetFromRootAsync(rootId, key);
         if (result == null) return NotFound();

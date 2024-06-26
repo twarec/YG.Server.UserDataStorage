@@ -38,7 +38,7 @@ public static class ServiceExtensions
 
     public static SwaggerUIOptions AddUserDataStorage(this SwaggerUIOptions options)
     {
-        options.SwaggerEndpoint(url: $"./swagger/UserDataStorage/swagger.json", name: "UserDataStorage");
+        options.SwaggerEndpoint(url: $"/swagger/UserDataStorage/swagger.json", name: "UserDataStorage");
         return options;
     }
 
