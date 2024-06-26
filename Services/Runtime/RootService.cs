@@ -20,18 +20,11 @@ public class RootService(GeneralContext db) : IRootService
             .ToListAsync();
     }
 
-    public async Task<Root?> GetAsync(int id)
+    public async Task<Root?> GetAsync(string id)
     {
         return await db.Roots
             .Include(_ => _.Fields)
             .SingleOrDefaultAsync(_ => _.Id == id);
-    }
-
-    public async Task<Root?> GetAsync(string key)
-    {
-        return await db.Roots
-            .Include(_ => _.Fields)
-            .SingleOrDefaultAsync(x => x.Key == key);
     }
 
     public async Task<IEnumerable<Root>> GetRangeAsync(int offset, int count)

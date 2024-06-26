@@ -6,14 +6,14 @@ namespace YG.Server.UserDataStorage.Controllers.Models;
 public class RootCreateData
 {
     [Required]
-    public string Key { get; set; } = string.Empty;
+    public string Id { get; set; } = string.Empty;
     public List<FieldCreateData> Fields { get; set; } = [];
 
     public Root ToDataBase()
     {
         return new Root
         {
-            Key = Key,
+            Id = Id,
             Fields = Fields.Select(_ => _.ToDataBase()).ToList(),
         };
     }

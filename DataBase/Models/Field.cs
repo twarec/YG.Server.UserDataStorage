@@ -16,5 +16,5 @@ public class Field
     public DateTime DateCreate { get; set; } = DateTime.UtcNow;
     public DateTime DateUpdate { get; set; } = DateTime.UtcNow;
 
-    public int RootId { get; set; } = 0;
+    public string RootId { get; set; } = string.Empty;
 }
