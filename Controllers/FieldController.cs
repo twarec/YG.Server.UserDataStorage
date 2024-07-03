@@ -10,7 +10,7 @@ namespace YG.Server.UserDataStorage.Controllers;
 [ApiController]
 [Route("UserDataStorage/[controller]")]
 [ApiExplorerSettings(GroupName = "UserDataStorage")]
-public class FieldController(IFieldService fieldService) : ControllerBase
+public class FieldController(IFieldService fieldService, IRootService rootService) : ControllerBase
 {
     [HttpPut("{id}")]
     [ProducesResponseType(typeof(Field), StatusCodes.Status200OK)]
@@ -66,6 +66,13 @@ public class FieldController(IFieldService fieldService) : ControllerBase
     public async Task<IActionResult> SetAsync([FromRoute, Required] string rootId, [FromQuery, Required] string key, [FromQuery, Required] string value)
     {
         var result = await fieldService.SetAsync(rootId, key, value) ?? await fieldService.CreateAsync(rootId, key, value);
+        if(result == null)
+        {
+            result = new Field { Key = key, Value = value, };
+            if (await rootService.CreateAsync(new Root { Id = rootId, Fields = [result] }) == null)
+                result = null;
+            
+        }
         if (result == null) return NotFound();
         return Ok(result);
     }
