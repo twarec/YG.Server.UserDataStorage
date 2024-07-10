@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
-using Swashbuckle.AspNetCore.Swagger;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using Swashbuckle.AspNetCore.SwaggerUI;
 using YG.Server.UserDataStorage.DataBase;
@@ -14,13 +14,13 @@ namespace YG.Server.UserDataStorage.Extensions;
 
 public static class ServiceExtensions
 {
-    public static IServiceCollection AddUserDataStorage(this IServiceCollection services, string dataBase)
+    public static IServiceCollection AddUserDataStorage(this IServiceCollection services, IConfiguration configuration)
     {
-        Configurate.DataBaseConnection = dataBase;
+        Configurate.Singleton = configuration.GetSection("Modules:YG.Server.ExceptionStorage").Get<Configurate>() ?? new Configurate();
 
         services.AddDbContext<GeneralContext>(_ =>
         {
-            _.UseNpgsql(Configurate.DataBaseConnection);
+            _.UseNpgsql(Configurate.Singleton.DataBaseConnection);
         });
 
         services
