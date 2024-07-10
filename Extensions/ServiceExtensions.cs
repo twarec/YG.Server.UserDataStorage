@@ -16,7 +16,7 @@ public static class ServiceExtensions
 {
     public static IServiceCollection AddUserDataStorage(this IServiceCollection services, IConfiguration configuration)
     {
-        Configurate.Singleton = configuration.GetSection("Modules:YG.Server.ExceptionStorage").Get<Configurate>() ?? new Configurate();
+        Configurate.Singleton = configuration.GetSection("Modules:YG.Server.UserDataStorage").Get<Configurate>() ?? new Configurate();
 
         services.AddDbContext<GeneralContext>(_ =>
         {
